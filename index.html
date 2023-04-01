@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Metaverse Quotes</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app" class="bg-gray-100">
+        <header class="bg-white shadow-md sticky top-0 z-10">
+            <div class="container mx-auto px-6 py-3 md:flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-800">{{ title }}</h1>
+                    <nav class="md:flex md:ml-4 md:ml-4">
+                        <ul class="list-none md:flex md:items-center">
+                            <li v-for="lang in languages" :key="lang" @click="setLanguage(lang)"
+                                :class="{ 'font-bold text-blue-500': lang === language }"
+                                class="cursor-pointer text-gray-500 hover:text-gray-800 hover:underline transition-colors duration-300 ease-in-out md:mx-4">
+                                {{ lang }}</li>
+                        </ul>
+                    </nav>
+                </div>
+                <ul class="list-none md:flex md:items-center">
+                    <li><a href="#" class="py-2 px-4 text-gray-500 hover:text-gray-800">Home</a></li>
+                    <li><a href="#" class="py-2 px-4 text-gray-500 hover:text-gray-800">About</a></li>
+                    <li><a href="#" class="py-2 px-4 text-gray-500 hover:text-gray-800">Contact</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <main>
+            <section v-if="loading" class="container mx-auto py-20 flex justify-center items-center">
+                <p class="text-lg text-gray-600">{{ loadingText }}</p>
+            </section>
+            <section v-else class="container mx-auto py-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div v-for="quote in quotes" :key="quote.id"
+                        class="bg-white border border-gray-200 p-6 rounded-2xl shadow-lg">
+                        <h2 class="text-lg font-medium text-gray-900 tracking-tight">{{ quote.author }}</h2>
+                        <p class="mt-4 text-base text-gray-500">{{ quote.quote }}</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="hero bg-gray-800 py-20">
+                <div class="container mx-auto">
+                    <h1 class="text-white text-4xl font-light mb-4">Welcome to my Metaverse</h1>
+                    <p class="text-white text-lg mb-6">Explore the endless possibilities of the future.</p>
+                    <a href="#"
+                        class="bg-blue-500 hover:bg-blue-600 py-3 px-6 text-white uppercase font-bold rounded">Get
+                        Started</a>
+                </div>
+                <template>
+                    <div class="carousel">
+                        <div class="carousel-inner">
+                            <div v-for="(item, index) in items"
+                                :class="['carousel-item', index === activeIndex ? 'active' : '']" :key="index">
+                                <img :src="item.image" alt="">
+                                <h2 class="text-xl font-bold">{{ item.caption }}</h2>
+                                <p>{{ item.description }}</p>
+                            </div>
+                        </div>
+
+                        <div class="carousel-nav">
+                            <button class="carousel-prev" @click="prev">&lt;</button>
+                            <button class="carousel-next" @click="next">&gt;</button>
+                        </div>
+                    </div>
+                </template>
+            </section>
+
+            <section class="features py-20">
+                <div class="container mx-auto">
+                    <h2 class="text-4xl font-bold mb-8">Features</h2>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 list-none">
+                        <li class="flex-1 mb-4"> <i class="fas fa-globe text-blue-500 mr-3"></i> <span>Global
+                                Reach</span> </li>
+                        <li class="flex py-4 mb-4"> <i class="fas fa-rocket text-blue-500 mr-3"></i> <span>Fast and
+                                Secure</span> </li>
+                        <li class="flex py-4 mb-4"> <i class="fas fa-cogs text-blue-500 mr-3"></i>
+                            <span>Customizable</span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <section class="about bg-gray-200 py-20">
+                <div class="container mx-auto">
+                    <h2 class="text-4xl font-bold mb-8">About Us</h2>
+                    <p class="text-lg text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                        laoreet tellus vitae arcu ultrices, quis sagittis ligula vulputate.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-gray-800 py-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <p class="text-white">&copy; 2022 Metaverse</p>
+                <p class="text-white">Powered by the metaverse</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
